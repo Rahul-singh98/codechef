@@ -1,7 +1,3 @@
-
-
-// C++ implementation of the
-// above approach
 #include <bits/stdc++.h>
 using namespace std;
  
