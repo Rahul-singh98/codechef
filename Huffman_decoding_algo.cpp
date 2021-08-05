@@ -95,7 +95,7 @@ void HuffmanCodes( int size){
 
 
 int main(){
-    string str = "GeekforGeeks";
+    string str = "Programming is fun and full of knowledge. And becoming a programmer is one of the best decision.";
     string encodedString , decodedString;
     calculateFreq(str);
 
