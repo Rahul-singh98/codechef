@@ -2,20 +2,6 @@
 #define ll long long int
 using namespace std;
 
-ll solve(ll arr[] , ll x , ll y , ll n ){
-    ll sum=0;
-    for(ll i=1;i<n;i++){
-        if(i%y !=0){
-            if(arr[i] == 0){
-                arr[i]= x;
-                sum += x;
-            }
-        }
-    }
-
-    return sum;
-}
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -28,15 +14,26 @@ int main(){
         ll sum=0;
         for(ll i=0;i<m;i++){
             ll x ,y; cin >> x >> y;
-            mp[x]=y;
+            if (mp[x]>0){
+                if(y>mp[x])
+                    mp[x]=y;
+            }
+            else
+                mp[x]=y;
         }
 
-        for (auto i:mp){
-            sum += solve(arr , i.first , i.second , n+1);
+        for(ll i=1;i<=n;i++){
+            for(auto k:mp){
+                if (arr[i]==0){
+                    if (arr[i]%k.second!=0){
+                        arr[i]=k.first;
+                        sum+=k.first;
+                    }
+                }
+            }
         }
 
-        cout << sum << "\n";
-
+        cout << sum << '\n';
     }
     return 0;
 }
