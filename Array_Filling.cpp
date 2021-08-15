@@ -3,37 +3,31 @@
 using namespace std;
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     int t;cin >> t;
     while(t--){
         ll n , m ; cin >> n >> m;
-        ll arr[n+1];
-        map<ll , ll , greater<ll>> mp;
-        memset(arr , 0 , sizeof(arr));
-        ll sum=0;
-        for(ll i=0;i<m;i++){
-            ll x ,y; cin >> x >> y;
-            if (mp[x]>0){
-                if(y>mp[x])
-                    mp[x]=y;
-            }
-            else
-                mp[x]=y;
+        vector<pair<int ,int>> l;
+
+        for(int i=0;i<m;i++){
+            ll x , y; cin >> x >> y;
+            l.push_back({x ,y});
+        }
+        sort(l.begin() , l.end() , greater<pair<int , int>>());
+        ll lcm=1;
+        ll rem=n;
+        ll res =0;
+
+        for(int i=0;i<m && rem >0;i++){
+            ll a = l[i].first , b=l[i].second;
+            lcm = lcm*b/__gcd(lcm , b);
+            res+=(rem-n/lcm)*a;
+            rem = n/lcm;
         }
 
-        for(ll i=1;i<=n;i++){
-            for(auto k:mp){
-                if (arr[i]==0){
-                    if (arr[i]%k.second!=0){
-                        arr[i]=k.first;
-                        sum+=k.first;
-                    }
-                }
-            }
-        }
-
-        cout << sum << '\n';
+        cout << res << '\n';
     }
     return 0;
 }
