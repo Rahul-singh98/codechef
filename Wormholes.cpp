@@ -21,11 +21,10 @@ int main(){
 
     int prev_min = INT_MAX;
 
-   for(int i=0;i<n;++i){
+   for(int i=0;i<n;i++){
        auto start = upper_bound(V.begin() , V.end() , t[i].first);
-       auto end = upper_bound(W.begin() , W.end() , t[i].second);
-       
-        cout << *start << " " << *end << endl;
+       auto end = lower_bound(W.begin() , W.end() , t[i].second);
+
        if (start!=V.begin() && end!=W.end()){
            --start;
            prev_min = min(prev_min , *end - *start +1);
